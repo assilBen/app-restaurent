@@ -1,26 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useCart } from "../../hooks/useCart";
-import classes from "./header.module.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useCart } from '../../hooks/useCart';
+import classes from './header.module.css';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function Header() {
-  const user = {
-    name: "Assil",
-  };
+  const { user, logout } = useAuth();
 
   const { cart } = useCart();
-  const logout = () => {};
+
   return (
-    <header>
+    <header className={classes.header}>
       <div className={classes.container}>
         <Link to="/" className={classes.logo}>
-          Home
+          Food Mine!
         </Link>
         <nav>
           <ul>
             {user ? (
               <li className={classes.menu_container}>
-                <Link to="/profile">{user.name}</Link>
+                <Link to="/dashboard">{user.name}</Link>
                 <div className={classes.menu}>
                   <Link to="/profile">Profile</Link>
                   <Link to="/orders">Orders</Link>
@@ -30,10 +29,11 @@ export default function Header() {
             ) : (
               <Link to="/login">Login</Link>
             )}
+
             <li>
               <Link to="/cart">
-                cart
-                {createImageBitmap.totalCount > 0 && (
+                Cart
+                {cart.totalCount > 0 && (
                   <span className={classes.cart_count}>{cart.totalCount}</span>
                 )}
               </Link>
