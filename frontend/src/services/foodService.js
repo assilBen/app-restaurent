@@ -1,4 +1,7 @@
-import { sample_foods, sample_tags } from "../data.js";
+import {
+  sample_foods,
+  sample_tags,
+} from "../../../backend/src/data.js/index.js.js";
 import axios from "axios";
 
 export const getAll = async () => sample_foods;
